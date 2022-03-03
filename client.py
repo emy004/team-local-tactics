@@ -4,6 +4,8 @@ from socket import socket, AF_INET,SOCK_DGRAM
 import pickle
 
 sock=socket(AF_INET,SOCK_DGRAM)
+sock2=socket(AF_INET,SOCK_DGRAM)
+sock2.bind(('localhost',5556))
 champs=load_some_champs()
 print_available_champs(champs)
 player1=[]
@@ -17,7 +19,6 @@ for i in range(2):
 
 
 
-
-#sock.sendto(pickle.dumps(load_some_champs()),("localhost",5555))
-
-#main()
+data,_=sock2.recvfrom(1024)
+match=pickle.loads(data)
+print_match_summary(match)
