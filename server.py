@@ -10,34 +10,38 @@ import pickle
 sock=socket(AF_INET,SOCK_DGRAM)
 sock.bind(("localhost",5555))
 
-sock2=socket(AF_INET,SOCK_DGRAM)
+
 
 player1=[]
 player2=[]
 adresses=[]
+adressbook=[]
 champs=load_some_champs()
 
-while  len(player2)!=2:
+while  (len(player2)<2):
+
  data,adress=sock.recvfrom(1024)
- if adress not in adresses:
-    adresses.append(adress)
+ if len(adresses)==0:
+    adresses.append(adress[1])
+    adressbook.append(adress)
     player1.append(data.decode())
-    print (player1)
- elif adress==adresses[0]:
+
+ elif adress==adresses:
     player1.append(data.decode())
-    print (player1)
- elif adress!=adress[0]:
-    adresses.append(adress)
+
+ elif adress!=adresses:
+    if adress not in adressbook:
+     adressbook.append(adress)
     player2.append(data.decode())
-    print (player2)
+    
+
 
             
 
-#for i in range(2):        
-    #player1.append(sock.recvfrom(1024)[0].decode())
-    #player2.append(sock.recvfrom(1024)[0].decode())
+
 
 print ("Player one chose:" + player1[0] + " and " + player1 [1])
+
 print ("Player two chose:" + player2 [0] + " and " + player2[1])
 
 match = Match(
@@ -45,7 +49,7 @@ match = Match(
     Team([champs[name] for name in player2]))
 
 match.play()
-
-sock2.sendto(pickle.dumps(match),(("localhost",5556)))
+for i in range(2):
+   sock.sendto(pickle.dumps(match),(adressbook[i]))
 
 
