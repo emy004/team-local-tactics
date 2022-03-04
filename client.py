@@ -5,23 +5,33 @@ import pickle
 
 sock=socket(AF_INET,SOCK_DGRAM)
 sock.connect(("localhost",5555))
+message="Hi"
+sock.sendto(message.encode(),(("Localhost",5555)))
 
-champs=load_some_champs()
-print_available_champs(champs)
+
+data,_=sock.recvfrom(1024)
+champs=pickle.loads(data)
+print_available_champs(pickle.loads(data))
+
+#data,_=sock2.recvfrom(2048)
+#champs=pickle.loads(data)
+#champs=load_some_champs()
+#print_available_champs(champs)
+
+
 player=[]
-player1=[]
-player2=[]
+
 while True:
-    champ=input("Choose your Champion:"  )
-    if champ in player:
+   champ=input("Choose your Champion:"  )
+   if champ in player:
         print ("You have already chosen that champion")
-    else:
+   elif champ not in champs:
+        print ("Not a valid champion")
+   else:
         player.append(champ)
         if len(player)==2:
             break
-#for _ in range(2):
- #       input_champion('Player 1', 'red', champs, player1, player2)
-  #      input_champion('Player 2', 'blue', champs, player2, player1)
+
 
 
 
