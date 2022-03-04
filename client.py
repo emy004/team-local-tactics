@@ -31,6 +31,6 @@ for i in range(2):
 
 
 
-data,_=sock.recvfrom(1024)
+data,_=sock.recvfrom(2048)
 match=pickle.loads(data)
 print_match_summary(match)
