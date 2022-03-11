@@ -5,11 +5,11 @@ Erland Myklebust
 
 # Execution Order
 The execution order to get the game to work is as follows:
-1)server.py
-2)database.py
-3)Two instances of client.py
+1. server.py
+2. database.py
+3. Two instances of client.py
 
-After that the chamption select prompt will appear in the client that connected first.
+After that the champion select prompt will appear in the client that connected first.
 
 # How to play
 First you have to clone the repository to your computer.
