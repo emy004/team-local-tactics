@@ -7,3 +7,7 @@ Katina,20,50,30
 Asir,5,5,90
 Cactus,5,90,5
 Luanne,90,5,5
+Karthage,40,40,20
+Darien,95,2,3
+Shindra,2,95,3
+Cherie,10,80,10
